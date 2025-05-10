@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 export interface Coin {
   id: string;
@@ -29,19 +30,26 @@ export class CryptoService {
   private marketsUrl = 'https://api.coingecko.com/api/v3/coins/markets';
   private detailUrl = 'https://api.coingecko.com/api/v3/coins';
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   // Coin list - liste af coins
   getCoins(Currencytype: string = 'usd'): Observable<Coin[]> {
-    const url = `${this.marketsUrl}?currence_type=${Currencytype}`;
-    return this.http.get<Coin[]>(url);
+    const url = `${this.marketsUrl}?vs_currency=${Currencytype}`;
+    return this.http.get<Coin[]>(url).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  // single coin details - Hent details om hver enkelt coin
+  // Single coin details - Hent details om hver enkelt coin
   getCoin(id: string): Observable<CoinDetail> {
     const url = `${this.detailUrl}/${id}`;
-    return this.http.get<CoinDetail>(url);
+    return this.http.get<CoinDetail>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(error: any): Observable<never> {
+    console.error('Det skete en fejl, error occurred:', error);
+    return throwError('Noget gik galt, Something went wrong, please try again later.');
   }
 }
