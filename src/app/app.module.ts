@@ -4,7 +4,6 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HtmlParser } from '@angular/compiler';
 import { CryptoListComponent } from './components/crypto-list/crypto-list.component';
 import { CryptoDetailComponent } from './components/crypto-detail/crypto-detail.component';
 
