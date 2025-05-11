@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CryptoService, Coin } from 'src/app/services/crypto.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-crypto-list',
@@ -11,8 +12,9 @@ export class CryptoListComponent implements OnInit {
   coins: Coin[] = [];
   isLoading = true;
   errorMessage = '';
+  hoveredCoin: Coin | null = null;
 
-  constructor(private cryptoService: CryptoService) {}
+  constructor(private cryptoService: CryptoService, private router: Router) {}
 
   ngOnInit(): void {
     this.cryptoService.getCoins().subscribe({
@@ -27,5 +29,19 @@ export class CryptoListComponent implements OnInit {
       }
     });
   }
+  
+onMouseEnter(coin: Coin): void {
+  this.hoveredCoin = coin;
+}
 
+onMouseLeave(): void {
+  this.hoveredCoin = null;
+}
+
+goToCoinDetail(coinId: string): void {
+  this.router.navigate(['/coin', coinId]);
+}
+
+
+  
 }
