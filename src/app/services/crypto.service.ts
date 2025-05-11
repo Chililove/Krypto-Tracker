@@ -27,8 +27,8 @@ export interface CoinDetail extends Coin {
   providedIn: 'root'
 })
 export class CryptoService {
-  private marketsUrl = 'https://api.coingecko.com/api/v3/coins/markets';
-  private detailUrl = 'https://api.coingecko.com/api/v3/coins';
+  private marketsUrl = '/api/v3/coins/markets';
+  private detailUrl = '/api/v3/coins';
 
   constructor(private http: HttpClient) {}
 
