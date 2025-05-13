@@ -20,6 +20,7 @@ export class CryptoListComponent implements OnInit {
     this.cryptoService.getCoins().subscribe({
       next: (data) => {
         this.coins = data;
+        this.sortCoins(); //.sort((a, b) => b.price_change_24h - a.price_change_24h);
         this.isLoading = false;
       },
       error: (error) => {
@@ -52,6 +53,18 @@ goToCoinDetail(coinId: string): void {
   this.router.navigate(['/coin', coinId]);
 }
 
+sortOption = 'mostGain';
+
+
+sortCoins() {
+  if (this.sortOption === 'mostGain') {
+    this.coins.sort((a, b) => b.price_change_24h - a.price_change_24h);
+  } else if (this.sortOption === 'mostLoss') {
+    this.coins.sort((a, b) => a.price_change_24h - b.price_change_24h);
+  } else if (this.sortOption === 'marketCap') {
+    this.coins.sort((a, b) => b.market_cap - a.market_cap);
+  }
+}
 
   
 }

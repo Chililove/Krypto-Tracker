@@ -16,6 +16,14 @@
   </div>
 </nav>
 
+<div class="mb-3 text-end">
+  <select class="form-select w-auto d-inline" [(ngModel)]="sortOption" (change)="sortCoins()">
+    <option value="mostGain">Going up</option>
+    <option value="mostLoss">Going down</option>
+    <option value="marketCap">Marketsvalue</option>
+  </select>
+</div>
+
 <div *ngIf="isLoading">Henter data... Getting data...</div>
 <div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
 
