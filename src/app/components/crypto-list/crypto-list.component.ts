@@ -30,13 +30,23 @@ export class CryptoListComponent implements OnInit {
     });
   }
   
-onMouseEnter(coin: Coin): void {
-  this.hoveredCoin = coin;
-}
+  onMouseEnter(coin: Coin): void {
+    this.hoveredCoin = coin;
+  }
 
-onMouseLeave(): void {
-  this.hoveredCoin = null;
-}
+  onMouseLeave(): void {
+    this.hoveredCoin = null;
+  }
+
+  onOverlayEnter(): void {
+    // Intet skal gøres, når musen er på overlayet
+  }
+
+  onOverlayLeave(): void {
+    // Fjern hoveredCoin, når musen forlader overlayet
+    this.hoveredCoin = null;
+  }
+
 
 goToCoinDetail(coinId: string): void {
   this.router.navigate(['/coin', coinId]);

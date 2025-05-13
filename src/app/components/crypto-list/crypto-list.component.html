@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">CryptoChills</a>
+    <a class="navbar-brand" routerLink="/">CryptoChills</a>
 
     <div class="dropdown ms-auto">
       <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
@@ -25,31 +25,49 @@
       class="col-12 col-sm-6 col-md-4"
       *ngFor="let coin of coins | slice:0:24"
     >
-    <div 
-  class="coin-card-wrapper" 
-  (click)="goToCoinDetail(coin.id)" 
-  style="cursor: pointer;"
->
-  <div class="coin-card text-center shadow-sm p-3 bg-white rounded h-100">
-    <img 
-      [src]="coin.image" 
-      [alt]="coin.name" 
-      class="img-fluid rounded-circle mx-auto d-block mt-3 coin-img" 
-      style="height: 50px;"
-    />
+      <div 
+        class="coin-card-wrapper"
+        (mouseenter)="onMouseEnter(coin)"
+        (mouseleave)="onMouseLeave()"
+        (click)="goToCoinDetail(coin.id)" 
+        style="cursor: pointer;"
+      >
+        <div class="coin-card text-center shadow-sm p-3 bg-white rounded h-100">
+          <img 
+            [src]="coin.image" 
+            [alt]="coin.name"
+            class="img-fluid rounded-circle mx-auto d-block mt-3 coin-img" 
+            style="height: 50px;"
+          />
 
-    <div class="overlay">
-      <p>Klik for detaljer</p>
+          <!-- Overlayet vises her -->
+          <div *ngIf="hoveredCoin === coin" class="overlay">
+            <img 
+            [src]="coin.image" 
+            [alt]="coin.name"
+            class="img-fluid rounded-circle mx-auto d-block mt-3 coin-img" 
+            style="height: 50px;"
+          />
+          <h5 class="mb-1">{{ coin.name }}</h5>
+
+          <p
+            [ngClass]="{
+              'text-success': coin.price_change_24h >= 0,
+              'text-danger': coin.price_change_24h < 0
+            }"
+            >
+            {{ coin.price_change_24h <= 0 ? '↓' : '↑' }}
+            (${{ coin.price_change_24h | number:'1.2-2' }})
+          </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-    </div>
-  </div>
-</div>
-
-<!-- Fullscreen overlay med coin detaljer -->
-<div class="coin-overlay" *ngIf="hoveredCoin">
+<!-- Fullscreen overlay med coin detaljer 
+<div class="coin-overlay" *ngIf="hoveredCoin" (mouseenter)="onOverlayEnter()" (mouseleave)="onOverlayLeave()">
   <div class="overlay-content bg-white p-4 rounded shadow text-center">
     <button class="btn-close float-end" aria-label="Close" (click)="hoveredCoin = null"></button>
     <h3>{{ hoveredCoin.name }} ({{ hoveredCoin.symbol.toUpperCase() }})</h3>
@@ -59,3 +77,4 @@
     <p><strong>24h Change:</strong> {{ hoveredCoin.price_change_24h | number:'1.2-2' }}%</p>
   </div>
 </div>
+-->
