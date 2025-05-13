@@ -42,23 +42,27 @@
 
           <!-- Overlayet vises her -->
           <div *ngIf="hoveredCoin === coin" class="overlay">
-            <img 
+          <div class="d-flex align-items-center justify-content-between w-100">
+           
+           <div style="width: 60px;" class=""d-flex justify-content-center> <img 
             [src]="coin.image" 
             [alt]="coin.name"
-            class="img-fluid rounded-circle mx-auto d-block mt-3 coin-img" 
-            style="height: 50px;"
+            class="img-fluid rounded-circle d-block mt-3 coin-img" 
+            style="height: 50px; margin-right: 20px;"
           />
-          <h5 class="mb-1">{{ coin.name }}</h5>
+          </div>
+          <h5 class="mb-0 flex-grow-1 text-center">{{ coin.name }}</h5>
 
           <p
             [ngClass]="{
               'text-success': coin.price_change_24h >= 0,
               'text-danger': coin.price_change_24h < 0
             }"
-            >
+            class="mb-0 text-end" style="white-space: nowrap;">
+            ${{ coin.price_change_24h | number:'1.2-2' }}
             {{ coin.price_change_24h <= 0 ? '↓' : '↑' }}
-            (${{ coin.price_change_24h | number:'1.2-2' }})
-          </p>
+         </p>
+          </div>
           </div>
         </div>
       </div>

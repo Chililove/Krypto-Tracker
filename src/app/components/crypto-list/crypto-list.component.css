@@ -17,9 +17,21 @@
 
 /* Coin image styling */
 .coin-img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
     transition: transform 0.2s ease;
+}
+
+h5 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    white-space: nowrap;
 }
 
 /* Hover effekt på billede */
@@ -46,8 +58,8 @@
     transition: opacity 0.3s ease;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 15px;
+    justify-content: space-between;
+    padding: 10px;
     border-radius: 20px;
     text-align: center;
 }
