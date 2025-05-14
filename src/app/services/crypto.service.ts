@@ -7,19 +7,23 @@ export interface Coin {
   id: string;
   symbol: string;
   name: string;
-  image: string;
-  current_price: number;
+  image: {
+    large: string;
+  };
+  current_price: { [currency: string]: number };
   market_cap: number;
   price_change_24h: number;
 }
 
 export interface CoinDetail extends Coin {
   description: {en: string};
-  crypto_market_data: {
+  market_data: {
     market_cap: {[currency: string]: number};
     total_supply: number;
     high_24h: {[currency: string]: number};
     low_24h: {[currency: string]: number};
+    price_change_24h: number;
+    current_price: { [currency: string]: number };
   };
 }
 
@@ -32,7 +36,7 @@ export class CryptoService {
 
   constructor(private http: HttpClient) {}
 
-  // Coin list - liste af coins
+  // Coin list - liste af mønterne
   getCoins(Currencytype: string = 'usd'): Observable<Coin[]> {
     const url = `${this.marketsUrl}?vs_currency=${Currencytype}`;
     return this.http.get<Coin[]>(url).pipe(
@@ -40,13 +44,14 @@ export class CryptoService {
     );
   }
 
-  // Single coin details - Hent details om hver enkelt coin
+  // Single coin details - Hent details om en enkelt coin/mønt
   getCoin(id: string): Observable<CoinDetail> {
     const url = `${this.detailUrl}/${id}`;
     return this.http.get<CoinDetail>(url).pipe(
       catchError(this.handleError)
     );
   }
+  
 
   private handleError(error: any): Observable<never> {
     console.error('Det skete en fejl, error occurred:', error);

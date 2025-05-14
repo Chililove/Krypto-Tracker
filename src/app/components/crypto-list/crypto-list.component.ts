@@ -50,7 +50,7 @@ export class CryptoListComponent implements OnInit {
 
 
 goToCoinDetail(coinId: string): void {
-  this.router.navigate(['/coin', coinId]);
+  this.router.navigate(['/coin-detail', coinId]);
 }
 
 sortOption = 'mostGain';

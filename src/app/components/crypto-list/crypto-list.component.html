@@ -40,7 +40,10 @@
         (click)="goToCoinDetail(coin.id)" 
         style="cursor: pointer;"
       >
+      <a [routerLink]="['/crypto-detail', coin.id]">
+
         <div class="coin-card text-center shadow-sm p-3 bg-white rounded h-100">
+          
           <img 
             [src]="coin.image" 
             [alt]="coin.name"
@@ -48,7 +51,7 @@
             style="height: 50px;"
           />
 
-          <!-- Overlayet vises her -->
+          <!-- Overlayet -->
           <div *ngIf="hoveredCoin === coin" class="overlay">
           <div class="d-flex align-items-center justify-content-between w-100">
            
@@ -73,20 +76,9 @@
           </div>
           </div>
         </div>
+      </a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Fullscreen overlay med coin detaljer 
-<div class="coin-overlay" *ngIf="hoveredCoin" (mouseenter)="onOverlayEnter()" (mouseleave)="onOverlayLeave()">
-  <div class="overlay-content bg-white p-4 rounded shadow text-center">
-    <button class="btn-close float-end" aria-label="Close" (click)="hoveredCoin = null"></button>
-    <h3>{{ hoveredCoin.name }} ({{ hoveredCoin.symbol.toUpperCase() }})</h3>
-    <img [src]="hoveredCoin.image" alt="{{ hoveredCoin.name }}" width="60" class="mb-3">
-    <p><strong>Price:</strong> ${{ hoveredCoin.current_price }}</p>
-    <p><strong>Market Cap:</strong> ${{ hoveredCoin.market_cap | number }}</p>
-    <p><strong>24h Change:</strong> {{ hoveredCoin.price_change_24h | number:'1.2-2' }}%</p>
-  </div>
-</div>
--->
