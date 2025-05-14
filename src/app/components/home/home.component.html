@@ -15,18 +15,17 @@
       </div>
     </div>
   </nav>
-
   <div class="fullscreen-wrapper d-flex justify-content-center align-items-center">
     <div class="container text-center">
       <h1 class="mb-5">CryptoChills</h1>
       <div class="row align-items-center justify-content-center">
         <!-- Venstre coin -->
-        <div class="col-12 col-md-3 mb-3 mb-md-0" *ngIf="topCoins.length > 0">
-          <div class="card shadow-sm">
-            <img [src]="topCoins[0].image" class="card-img-top w-50 mx-auto mt-3" alt="{{ topCoins[0].name }}">
+        <div class="col-12 col-md-3 mb-3 mb-md-0" *ngIf="filteredCoins.length > 0">
+          <div class="card shadow-sm" *ngFor="let coin of filteredCoins.slice(0, 1)">
+            <img [src]="coin.image" class="card-img-top w-50 mx-auto mt-3" alt="{{ coin.name }}">
             <div class="card-body">
-              <h5 class="card-title">{{ topCoins[0].name }}</h5>
-              <p class="card-text">${{ topCoins[0].current_price }}</p>
+              <h5 class="card-title">{{ coin.name }}</h5>
+              <p class="card-text">${{ coin.current_price }}</p>
             </div>
           </div>
         </div>
@@ -37,16 +36,17 @@
         </div>
   
         <!-- Højre coin -->
-        <div class="col-12 col-md-3 mt-3 mt-md-0" *ngIf="topCoins.length > 1">
-          <div class="card shadow-sm">
-            <img [src]="topCoins[1].image" class="card-img-top w-50 mx-auto mt-3" alt="{{ topCoins[1].name }}">
+        <div class="col-12 col-md-3 mt-3 mt-md-0" *ngIf="filteredCoins.length > 1">
+          <div class="card shadow-sm" *ngFor="let coin of filteredCoins.slice(1, 2)">
+            <img [src]="coin.image" class="card-img-top w-50 mx-auto mt-3" alt="{{ coin.name }}">
             <div class="card-body">
-              <h5 class="card-title">{{ topCoins[1].name }}</h5>
-              <p class="card-text">${{ topCoins[1].current_price }}</p>
+              <h5 class="card-title">{{ coin.name }}</h5>
+              <p class="card-text">${{ coin.current_price }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  
   
