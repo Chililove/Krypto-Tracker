@@ -1,0 +1,22 @@
+input {
+    font-size: 1.2rem;
+    padding: 0.75rem;
+}
+
+.navbar-collapse {
+    overflow: visible !important;
+}
+
+.fullscreen-wrapper {
+    height: calc(100vh - 56px); /* Trækker navbar-højde fra */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+  }
+  

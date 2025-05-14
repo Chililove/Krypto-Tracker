@@ -1,0 +1,52 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/">CryptoChills</a>
+  
+      <div class="dropdown ms-auto">
+        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" routerLink="/crypto-list">Coins</a></li>
+          <!--<li><a class="dropdown-item" routerLink="#">About</a></li>
+          <li><a class="dropdown-item" routerLink="#">Search Coin</a></li>
+        -->  </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="fullscreen-wrapper d-flex justify-content-center align-items-center">
+    <div class="container text-center">
+      <h1 class="mb-5">CryptoChills</h1>
+      <div class="row align-items-center justify-content-center">
+        <!-- Venstre coin -->
+        <div class="col-12 col-md-3 mb-3 mb-md-0" *ngIf="topCoins.length > 0">
+          <div class="card shadow-sm">
+            <img [src]="topCoins[0].image" class="card-img-top w-50 mx-auto mt-3" alt="{{ topCoins[0].name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ topCoins[0].name }}</h5>
+              <p class="card-text">${{ topCoins[0].current_price }}</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Søgebaren -->
+        <div class="col-12 col-md-6">
+          <input type="text" class="form-control form-control-lg" placeholder="Søg efter en coin..." [(ngModel)]="searchTerm">
+        </div>
+  
+        <!-- Højre coin -->
+        <div class="col-12 col-md-3 mt-3 mt-md-0" *ngIf="topCoins.length > 1">
+          <div class="card shadow-sm">
+            <img [src]="topCoins[1].image" class="card-img-top w-50 mx-auto mt-3" alt="{{ topCoins[1].name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ topCoins[1].name }}</h5>
+              <p class="card-text">${{ topCoins[1].current_price }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

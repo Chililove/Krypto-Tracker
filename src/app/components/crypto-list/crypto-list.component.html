@@ -1,12 +1,92 @@
-<p>crypto-list works!</p>
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">CryptoChills</a>
+
+    <div class="dropdown ms-auto">
+      <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" routerLink="/crypto-list">Coins</a></li>
+        <!--<li><a class="dropdown-item" routerLink="#">About</a></li>
+        <li><a class="dropdown-item" routerLink="#">Search Coin</a></li>
+      --> </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="mb-3 text-end">
+  <select class="form-select w-auto d-inline" [(ngModel)]="sortOption" (change)="sortCoins()">
+    <option value="mostGain">Going up</option>
+    <option value="mostLoss">Going down</option>
+    <option value="marketCap">Marketsvalue</option>
+  </select>
+</div>
 
 <div *ngIf="isLoading">Henter data... Getting data...</div>
-<div *ngIf="errorMessage">{{ errorMessage }}</div>
+<div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>
 
-<ul *ngIf="!isLoading && !errorMessage">
-  <li *ngFor="let coin of coins">
-    <img [src]="coin.image" alt="{{ coin.name }}" width="20" />
-    <strong>{{ coin.name }}</strong> ({{ coin.symbol.toUpperCase() }}): 
-    ${{ coin.current_price }}
-  </li>
-</ul>
+<div class="container my-5" *ngIf="!isLoading && !errorMessage">
+  <div class="row g-3">
+    <div 
+      class="col-12 col-sm-6 col-md-4"
+      *ngFor="let coin of coins | slice:0:24"
+    >
+      <div 
+        class="coin-card-wrapper"
+        (mouseenter)="onMouseEnter(coin)"
+        (mouseleave)="onMouseLeave()"
+        (click)="goToCoinDetail(coin.id)" 
+        style="cursor: pointer;"
+      >
+        <div class="coin-card text-center shadow-sm p-3 bg-white rounded h-100">
+          <img 
+            [src]="coin.image" 
+            [alt]="coin.name"
+            class="img-fluid rounded-circle mx-auto d-block mt-3 coin-img" 
+            style="height: 50px;"
+          />
+
+          <!-- Overlayet vises her -->
+          <div *ngIf="hoveredCoin === coin" class="overlay">
+          <div class="d-flex align-items-center justify-content-between w-100">
+           
+           <div style="width: 60px;" class=""d-flex justify-content-center> <img 
+            [src]="coin.image" 
+            [alt]="coin.name"
+            class="img-fluid rounded-circle d-block mt-3 coin-img" 
+            style="height: 50px; margin-right: 20px;"
+          />
+          </div>
+          <h5 class="mb-0 flex-grow-1 text-center">{{ coin.name }}</h5>
+
+          <p
+            [ngClass]="{
+              'text-success': coin.price_change_24h >= 0,
+              'text-danger': coin.price_change_24h < 0
+            }"
+            class="mb-0 text-end" style="white-space: nowrap;">
+            ${{ coin.price_change_24h | number:'1.2-2' }}
+            {{ coin.price_change_24h <= 0 ? '↓' : '↑' }}
+         </p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fullscreen overlay med coin detaljer 
+<div class="coin-overlay" *ngIf="hoveredCoin" (mouseenter)="onOverlayEnter()" (mouseleave)="onOverlayLeave()">
+  <div class="overlay-content bg-white p-4 rounded shadow text-center">
+    <button class="btn-close float-end" aria-label="Close" (click)="hoveredCoin = null"></button>
+    <h3>{{ hoveredCoin.name }} ({{ hoveredCoin.symbol.toUpperCase() }})</h3>
+    <img [src]="hoveredCoin.image" alt="{{ hoveredCoin.name }}" width="60" class="mb-3">
+    <p><strong>Price:</strong> ${{ hoveredCoin.current_price }}</p>
+    <p><strong>Market Cap:</strong> ${{ hoveredCoin.market_cap | number }}</p>
+    <p><strong>24h Change:</strong> {{ hoveredCoin.price_change_24h | number:'1.2-2' }}%</p>
+  </div>
+</div>
+-->
