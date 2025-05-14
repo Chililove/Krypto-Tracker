@@ -9,6 +9,7 @@ import { HomeComponent } from './components/home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'crypto-list', component: CryptoListComponent },
+  { path: 'crypto-detail/:id', component: CryptoDetailComponent }
 ];
 
 @NgModule({
