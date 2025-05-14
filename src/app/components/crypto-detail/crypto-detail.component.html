@@ -47,9 +47,10 @@
           <h5>Total supply</h5>
           <p>{{ coin.market_data.total_supply || 'Ikke oplyst' }}</p>
   
-          <h5>Homepage</h5>
-          <a *ngIf="coin && coin.description && coin.description.en" routerLink="/crypto-detail/:id" target="_blank">
-            {{ coin.description }}
+          
+          <a *ngIf="coin && coin.description && coin.description.en" routerLink="/" class="btn btn-primary"
+          >
+        Go back to homepage
           </a>
           
         </div>
