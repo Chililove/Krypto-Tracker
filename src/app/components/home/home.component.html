@@ -22,7 +22,9 @@
         <!-- Venstre coin -->
         <div class="col-12 col-md-3 mb-3 mb-md-0" *ngIf="filteredCoins.length > 0">
           <div class="card shadow-sm" *ngFor="let coin of filteredCoins.slice(0, 1)">
+            <a [routerLink]="['/crypto-detail', coin.id]">
             <img [src]="coin.image" class="card-img-top w-50 mx-auto mt-3" alt="{{ coin.name }}">
+            </a>
             <div class="card-body">
               <h5 class="card-title">{{ coin.name }}</h5>
               <p class="card-text">${{ coin.current_price }}</p>
@@ -38,7 +40,9 @@
         <!-- Højre coin -->
         <div class="col-12 col-md-3 mt-3 mt-md-0" *ngIf="filteredCoins.length > 1">
           <div class="card shadow-sm" *ngFor="let coin of filteredCoins.slice(1, 2)">
+            <a [routerLink]="['/crypto-detail', coin.id]">
             <img [src]="coin.image" class="card-img-top w-50 mx-auto mt-3" alt="{{ coin.name }}">
+            </a>
             <div class="card-body">
               <h5 class="card-title">{{ coin.name }}</h5>
               <p class="card-text">${{ coin.current_price }}</p>
